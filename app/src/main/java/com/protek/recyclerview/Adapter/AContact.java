@@ -11,15 +11,16 @@ import com.protek.recyclerview.Model.MContact;
 import com.protek.recyclerview.R;
 import com.protek.recyclerview.ViewHolder.VHContact;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AContact extends RecyclerView.Adapter<VHContact> {
 
     //CONTACT LIST
-    List<MContact> mContacts;
+    ArrayList<MContact> contactArrayList;
 
-    public AContact(List<MContact> mContacts) {
-        this.mContacts = mContacts;
+    public AContact(ArrayList<MContact> contactArrayList) {
+        this.contactArrayList = contactArrayList;
     }
 
     @NonNull
@@ -36,16 +37,16 @@ public class AContact extends RecyclerView.Adapter<VHContact> {
     public void onBindViewHolder(@NonNull VHContact holder, int position) {
 
         //GET CONTACT AT POSITION
-        MContact contact = mContacts.get(position);
+        MContact contact = contactArrayList.get(position);
 
         //SET VIEW
         holder.contactName.setText(contact.getContactName());
         holder.contactNumber.setText(contact.getContactNumber());
-        holder.contactFirstLetter.setText(contact.getContactName().charAt(0));
+        holder.contactFirstLetter.setText(contact.getContactName().substring(0,1));
     }
 
     @Override
     public int getItemCount() {
-        return mContacts.size();
+        return contactArrayList.size();
     }
 }

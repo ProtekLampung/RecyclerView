@@ -8,12 +8,14 @@ import android.os.Bundle;
 import com.protek.recyclerview.Adapter.AContact;
 import com.protek.recyclerview.Model.MContact;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     //CREATE CONTACT INSTANCE LIST
-    public List<MContact> mContact;
+    public ArrayList<MContact> contactList;
 
     //DECLARE VIEW
     RecyclerView recyclerView;
@@ -26,18 +28,17 @@ public class MainActivity extends AppCompatActivity {
         //INITIALIZE VIEW:
         recyclerView = findViewById(R.id.main_recyclerview);
 
-        mContact.add(new MContact(0,"Penggua","08293123"));
-    }
+        //INITIALIZE LIST
+        contactList = new ArrayList<>();
 
-    @Override
-    protected void onStart() {
-        super.onStart();
+        contactList.add(new MContact(0,"Pengguna","08293123"));
 
         //ADAPTER INSTANCE
-        AContact adapterContact = new AContact(mContact);
+        AContact adapterContact = new AContact(contactList);
+        //adapterContact.notify();
 
         //SETTING UP RECYCLER VIEW
         recyclerView.setAdapter(adapterContact);
-
     }
+
 }
