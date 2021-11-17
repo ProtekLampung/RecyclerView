@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:paddingHorizontal="20dp"
+    android:paddingVertical="12dp"
+    android:clickable="true"
+    android:foreground="?selectableItemBackground"
+    android:id="@+id/item_contact_container">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        app:cardElevation="0dp"
+        android:backgroundTint="@android:color/darker_gray"
+        app:cardCornerRadius="40dp">
+
+        <TextView
+            android:id="@+id/item_contact_firstletter"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="A"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textSize="20dp" />
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:layout_marginStart="20dp"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/item_contact_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="contactName"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="?colorOnSecondary" />
+
+        <TextView
+            android:id="@+id/item_contact_number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="contactNumber"
+            android:textSize="10sp"
+            android:textColor="@android:color/darker_gray" />
+
+    </LinearLayout>
+
+</LinearLayout>
