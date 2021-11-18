@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
         contactList = new ArrayList<>();
 
         contactList.add(new MContact(0,"Pengguna","08293123"));
+        contactList.add(new MContact(1,"Wow","089231239"));
 
         //ADAPTER INSTANCE
         AContact adapterContact = new AContact(contactList);
