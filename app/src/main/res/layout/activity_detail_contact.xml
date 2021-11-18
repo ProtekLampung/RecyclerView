@@ -15,8 +15,74 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
-            app:title="contactName" />
+            app:title="Detail"
+            app:menu="@menu/menu_toolbar_detail_contact"/>
 
     </com.google.android.material.appbar.AppBarLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+        android:orientation="vertical">
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            app:cardElevation="0dp"
+            app:cardCornerRadius="100dp"
+            android:backgroundTint="@android:color/darker_gray"
+            android:layout_gravity="center"
+            android:layout_marginTop="40dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="A"
+                android:textSize="32sp"
+                android:textColor="?colorOnSecondary"
+                android:textStyle="bold"
+                android:gravity="center" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="contactName"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="?colorOnSecondary"
+            android:layout_marginTop="40dp"
+            android:layout_marginHorizontal="20dp"/>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:src="@drawable/line_gray"
+            android:layout_marginTop="20dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="contactNumber\nMobile"
+            android:textSize="16sp"
+            android:textColor="?colorOnSecondary"
+            android:drawableLeft="@drawable/ic_baseline_phone_24"
+            android:drawablePadding="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginHorizontal="20dp"/>
+
+    </LinearLayout>
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:text="Edit Contact"
+        android:textAllCaps="false"
+        app:icon="@drawable/ic_baseline_edit_24"
+        app:iconGravity="start"
+        android:layout_margin="20dp"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
