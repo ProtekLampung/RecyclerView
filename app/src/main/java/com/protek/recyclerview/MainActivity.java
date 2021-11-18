@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         contactList.add(new MContact(1,"Wow","089231239"));
 
         //ADAPTER INSTANCE
-        AContact adapterContact = new AContact(contactList);
+        AContact adapterContact = new AContact(contactList,MainActivity.this);
         //adapterContact.notify();
 
         //SETTING UP RECYCLER VIEW
