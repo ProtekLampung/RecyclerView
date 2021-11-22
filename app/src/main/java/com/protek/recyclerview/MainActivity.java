@@ -3,8 +3,11 @@ package com.protek.recyclerview;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.protek.recyclerview.Adapter.AContact;
 import com.protek.recyclerview.Model.MContact;
 
@@ -19,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
 
     //DECLARE VIEW
     RecyclerView recyclerView;
+    FloatingActionButton floatingActionButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +31,10 @@ public class MainActivity extends AppCompatActivity {
 
         //INITIALIZE VIEW:
         recyclerView = findViewById(R.id.main_recyclerview);
+        floatingActionButton = findViewById(R.id.main_fab);
+
+        //FAB ON CLICK
+        floatingActionButton.setOnClickListener(fabOnClick());
 
         //INITIALIZE LIST
         contactList = new ArrayList<>();
@@ -40,6 +48,19 @@ public class MainActivity extends AppCompatActivity {
 
         //SETTING UP RECYCLER VIEW
         recyclerView.setAdapter(adapterContact);
+    }
+
+    //FAB ONCLICK FUNCTION
+    View.OnClickListener fabOnClick() {
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //INTENT TO EDITOR PAGE
+                Intent intent = new Intent(MainActivity.this, ContactEditor.class);
+                startActivity(intent);
+                finish();
+            }
+        };
     }
 
 }

@@ -43,7 +43,7 @@ public class DetailContact extends AppCompatActivity {
             }
         });
 
-        //GETINTENT
+        //GET INTENT
         firstLetterName.setText(getIntent().getStringExtra("contactName").substring(0,1));
         contactName.setText(getIntent().getStringExtra("contactName"));
         contactNumber.setText(getIntent().getStringExtra("contactNumber"));
