@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.protek.recyclerview.Adapter.AContact;
@@ -19,10 +20,15 @@ public class MainActivity extends AppCompatActivity {
 
     //CREATE CONTACT INSTANCE LIST
     public ArrayList<MContact> contactList;
+    public MContact contact;
+
+    //ADAPTER
+    AContact adapterContact;
 
     //DECLARE VIEW
     RecyclerView recyclerView;
     FloatingActionButton floatingActionButton;
+    TextView textNoContact;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,22 +38,28 @@ public class MainActivity extends AppCompatActivity {
         //INITIALIZE VIEW:
         recyclerView = findViewById(R.id.main_recyclerview);
         floatingActionButton = findViewById(R.id.main_fab);
+        textNoContact = findViewById(R.id.text_nocontact);
 
         //FAB ON CLICK
         floatingActionButton.setOnClickListener(fabOnClick());
 
         //INITIALIZE LIST
-        contactList = new ArrayList<>();
+        contact = new MContact();
+        contactList = contact.getContactList();
+        //contact.addContactList(new MContact(0,"Pengguna","+6298462823"));
 
-        contactList.add(new MContact(0,"Pengguna","08293123"));
-        contactList.add(new MContact(1,"Wow","089231239"));
+//        contactList.add(new MContact(0,"Pengguna","08293123"));
+//        contactList.add(new MContact(1,"Wow","089231239"));
 
         //ADAPTER INSTANCE
-        AContact adapterContact = new AContact(contactList,MainActivity.this);
+        adapterContact = new AContact(contactList,MainActivity.this);
         //adapterContact.notify();
 
         //SETTING UP RECYCLER VIEW
         recyclerView.setAdapter(adapterContact);
+
+        //INFORMATION NO CONTACT
+        noContact(adapterContact,contactList, textNoContact);
     }
 
     //FAB ONCLICK FUNCTION
@@ -62,5 +74,16 @@ public class MainActivity extends AppCompatActivity {
             }
         };
     }
+
+    //IF NO CONTACT
+    void noContact(AContact adapter, ArrayList<MContact> contactList, TextView textNoContact) {
+        //CONDITION:
+        if (adapter.getItemCount()==0) {
+            textNoContact.setVisibility(View.VISIBLE);
+        }else {
+            textNoContact.setVisibility(View.GONE);
+        }
+    }
+
 
 }

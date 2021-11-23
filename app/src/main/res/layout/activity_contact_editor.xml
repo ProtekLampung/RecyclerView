@@ -12,6 +12,7 @@
         android:layout_height="wrap_content">
 
         <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/editor_toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:title="Editor"
@@ -20,6 +21,7 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/editor_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
@@ -51,11 +53,13 @@
                 app:placeholderText="Input contact name">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editor_contactname"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPersonName|textCapWords"
-                    android:textSize="14sp"
-                    android:textColor="?colorOnSecondary"/>
+                    android:textColor="?colorOnSecondary"
+                    android:maxLength="20"
+                    android:maxLines="1"/>
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -67,14 +71,17 @@
                 app:startIconDrawable="@drawable/ic_baseline_phone_24"
                 app:startIconTint="@color/color_selector_primary_gray"
                 app:placeholderText="Input contact number"
-                android:layout_marginTop="20dp">
+                android:layout_marginTop="20dp"
+                app:prefixText="+62">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editor_contactnumber"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="phone"
-                    android:textSize="14sp"
-                    android:textColor="?colorOnSecondary"/>
+                    android:textColor="?colorOnSecondary"
+                    android:maxLength="13"
+                    android:maxLines="1" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
