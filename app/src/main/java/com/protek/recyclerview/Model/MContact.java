@@ -42,34 +42,4 @@ public class MContact {
         this.contactNumber = contactNumber;
     }
 
-    //ADD TEMPORARY DATA CONTAINER
-    //DATA LIST:
-    private static ArrayList<MContact> contactList = new ArrayList<MContact>();
-    //INT CONTACT LAST INDEX:
-    private int lastIndex = -1;
-    //FUNCTION
-    //GET LAST INDEX:
-
-    public int getLastIndex() {
-        return lastIndex;
-    }
-
-    //GET CONTACT LIST:
-    public static ArrayList<MContact> getContactList() {
-        return contactList;
-    }
-    //ADD:
-    public void addContactList(MContact mContact) {
-        contactList.add(mContact);
-    }
-
-    //EDIT:
-    public void editContact(int contactIndex, MContact mContact) {
-        contactList.set(contactIndex, mContact);
-    }
-
-    //DELETE:
-    public void deleteContact(int contactIndex) {
-        contactList.remove(contactIndex);
-    }
 }

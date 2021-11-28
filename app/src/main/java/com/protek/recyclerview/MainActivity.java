@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.protek.recyclerview.Adapter.AContact;
+import com.protek.recyclerview.Data.DummyData;
 import com.protek.recyclerview.Model.MContact;
 
 import java.util.ArrayList;
@@ -19,8 +20,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     //CREATE CONTACT INSTANCE LIST
-    public ArrayList<MContact> contactList;
-    public MContact contact;
+    public DummyData dummyData;
 
     //ADAPTER
     AContact adapterContact;
@@ -44,22 +44,18 @@ public class MainActivity extends AppCompatActivity {
         floatingActionButton.setOnClickListener(fabOnClick());
 
         //INITIALIZE LIST
-        contact = new MContact();
-        contactList = contact.getContactList();
-        //contact.addContactList(new MContact(0,"Pengguna","+6298462823"));
-
-//        contactList.add(new MContact(0,"Pengguna","08293123"));
-//        contactList.add(new MContact(1,"Wow","089231239"));
+        dummyData = new DummyData();
+        //ArrayList<MContact> contactList = dummyData.getContactList();
 
         //ADAPTER INSTANCE
-        adapterContact = new AContact(contactList,MainActivity.this);
+        adapterContact = new AContact(dummyData.getContactList(),MainActivity.this);
         //adapterContact.notify();
 
         //SETTING UP RECYCLER VIEW
         recyclerView.setAdapter(adapterContact);
 
         //INFORMATION NO CONTACT
-        noContact(adapterContact,contactList, textNoContact);
+        noContact(adapterContact,dummyData.getContactList(), textNoContact);
     }
 
     //FAB ONCLICK FUNCTION
@@ -85,5 +81,9 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
 
+    }
 }

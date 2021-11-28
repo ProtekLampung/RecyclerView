@@ -1,14 +1,18 @@
 package com.protek.recyclerview;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
+import com.protek.recyclerview.Data.DummyData;
 import com.protek.recyclerview.Model.MContact;
 
 public class DetailContact extends AppCompatActivity {
@@ -20,8 +24,8 @@ public class DetailContact extends AppCompatActivity {
     TextView contactNumber;
     ExtendedFloatingActionButton editContact;
 
-    //Contact
-    MContact mContact;
+    //Dummy Data
+    DummyData dummyData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +38,7 @@ public class DetailContact extends AppCompatActivity {
         contactName = findViewById(R.id.detailcontact_contactname);
         contactNumber = findViewById(R.id.detailcontact_contactnumber);
         editContact = findViewById(R.id.detailcontact_editcontact);
+        dummyData = new DummyData();
 
         //TOOLBAR BACK ICON PRESS
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -44,9 +49,23 @@ public class DetailContact extends AppCompatActivity {
         });
 
         //GET INTENT
-        firstLetterName.setText(getIntent().getStringExtra("contactName").substring(0,1));
-        contactName.setText(getIntent().getStringExtra("contactName"));
-        contactNumber.setText(getIntent().getStringExtra("contactNumber"));
+        int position = getIntent().getIntExtra("position",0);
+        int contactIndex = getIntent().getIntExtra("contactIndex",0);
+        String stringContactName = getIntent().getStringExtra("contactName");
+        String stringContactNumber = getIntent().getStringExtra("contactNumber");
+
+        //SET VIEW UI
+        firstLetterName.setText(stringContactName.substring(0,1));
+        contactName.setText(stringContactName);
+        contactNumber.setText(stringContactNumber);
+
+        //TOOLBAR MENU DELETE:
+        toolbar.setOnMenuItemClickListener(onMenuItemClick(dummyData, position));
+
+        //XFAB EDIT CONTACT:
+        editContact.setOnClickListener(
+                xFabOnClick(DetailContact.this, contactIndex, stringContactName, stringContactNumber));
+
     }
 
     @Override
@@ -60,4 +79,40 @@ public class DetailContact extends AppCompatActivity {
         finish();
 
     }
+
+    //TOOLBAR MENU FUNCTION:
+    Toolbar.OnMenuItemClickListener onMenuItemClick(DummyData data, int position) {
+        return new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                //SWITCH
+                switch (item.getItemId()) {
+                    case R.id.menu_toolbar_detail_contact_delete:
+                        //DELETE CONTACT, REQUIRED INDEX:
+                        data.deleteContact(position);
+
+                        //BACK TO MAIN ACTIVITY:
+                        onBackPressed();
+                        return true;
+                }
+                return false;
+            }
+        };
+    }
+
+    //XFAB ON CLICK FUNCTION:
+    View.OnClickListener xFabOnClick(Context context, int contactIndex, String contactName, String contactNumber) {
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //CHANGE ACTIVITY TO EDITOR:
+                Intent intent = new Intent(context, ContactEditor.class);
+                intent.putExtra("contactIndex",contactIndex);
+                intent.putExtra("contactName",contactName);
+                intent.putExtra("contactNumber",contactNumber);
+                startActivity(intent);
+            }
+        };
+    }
+
 }

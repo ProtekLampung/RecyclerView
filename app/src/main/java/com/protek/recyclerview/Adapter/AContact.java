@@ -59,6 +59,8 @@ public class AContact extends RecyclerView.Adapter<VHContact> {
                 //PREPARE BUNDLE
                 //INTENT
                 Intent intent = new Intent(context, DetailContact.class);
+                intent.putExtra("position",holder.getAdapterPosition());
+                intent.putExtra("contactIndex",contact.getContactIndex());
                 intent.putExtra("contactName",contact.getContactName());
                 intent.putExtra("contactNumber",contact.getContactNumber());
                 context.startActivity(intent);

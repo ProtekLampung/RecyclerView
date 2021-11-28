@@ -9,6 +9,7 @@ import android.view.View;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
+import com.protek.recyclerview.Data.DummyData;
 import com.protek.recyclerview.Model.MContact;
 
 public class ContactEditor extends AppCompatActivity {
@@ -20,8 +21,7 @@ public class ContactEditor extends AppCompatActivity {
     TextInputEditText inputContactNumber;
 
     //CONTACT DATA
-    MContact mContact;
-    //MainActivity mainActivity;
+    DummyData dummyData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +33,7 @@ public class ContactEditor extends AppCompatActivity {
         floatingActionButton = findViewById(R.id.editor_fab);
         inputContactName = findViewById(R.id.editor_contactname);
         inputContactNumber = findViewById(R.id.editor_contactnumber);
-        //mainActivity = new MainActivity();
+        dummyData = new DummyData();
 
         //TOOLBAR NAVIGATION CLICK
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -43,12 +43,31 @@ public class ContactEditor extends AppCompatActivity {
             }
         });
 
-        //FAB ON CLICK
-        floatingActionButton.setOnClickListener(fabOnClick(inputContactName, inputContactNumber));
+        //GET INTENT
+        int contactIndex = getIntent().getIntExtra("contactIndex",-1);
+        String stringContactName = getIntent().getStringExtra("contactName");
+        String stringContactNumber = getIntent().getStringExtra("contactNumber");
+
+        //IF INTENT EXTRA EXIST:
+        if (contactIndex != -1) {
+            //SET VIEW UI:
+            inputContactName.setText(stringContactName);
+            inputContactNumber.setText(stringContactNumber.substring(4));
+
+            //SET FAB ON CLICK:
+            floatingActionButton.setOnClickListener(fabOnClickEditData(dummyData, inputContactName, inputContactNumber, contactIndex));
+
+        }
+        //DEFAULT FAB ON CLICK:
+        else {
+            floatingActionButton.setOnClickListener(fabOnClickNewData(dummyData, inputContactName, inputContactNumber));
+        }
+
     }
 
     //FAB ON CLICK FUNCTION:
-    View.OnClickListener fabOnClick(TextInputEditText inputContactName, TextInputEditText inputContactNumber) {
+    //SAVE NEW DATA:
+    View.OnClickListener fabOnClickNewData(DummyData data, TextInputEditText inputContactName, TextInputEditText inputContactNumber) {
         return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -56,9 +75,26 @@ public class ContactEditor extends AppCompatActivity {
                 String contactName = inputContactName.getText().toString();
                 String contactNumber = inputContactNumber.getText().toString();
 
-                //SAVE TO MODEL
-                MContact contact = new MContact();
-                contact.addContactList(new MContact(contact.getLastIndex()+1,contactName,"+62 "+contactNumber));
+                //SAVE TO NEW CONTACT
+                data.addContact(contactName, "+62 "+contactNumber);
+
+                //CHANGE ACTIVITY TO MAIN:
+                onBackPressed();
+            }
+        };
+    }
+
+    //EDIT DATA
+    View.OnClickListener fabOnClickEditData(DummyData data, TextInputEditText inputContactName, TextInputEditText inputContactNumber, int contactIndex) {
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //GET TEXT FROM INPUT
+                String contactName = inputContactName.getText().toString();
+                String contactNumber = inputContactNumber.getText().toString();
+
+                //SAVE TO NEW CONTACT
+                data.editContact(contactIndex, new MContact(contactIndex, contactName, "+62 "+contactNumber));
 
                 //CHANGE ACTIVITY TO MAIN:
                 onBackPressed();
