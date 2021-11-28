@@ -1,5 +1,7 @@
 package com.protek.recyclerview.Model;
 
+import java.util.ArrayList;
+
 public class MContact {
 
     private int contactIndex;
@@ -39,4 +41,5 @@ public class MContact {
     public void setContactNumber(String contactNumber) {
         this.contactNumber = contactNumber;
     }
+
 }
